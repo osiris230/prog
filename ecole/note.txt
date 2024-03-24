@@ -1,0 +1,8 @@
+Dans le projet ecole:
+                    -administration
+                    -admission
+                    -enseignants
+                    -etudiants
+NB : en d'autres termes on appel ces dossiers des packages python
+    -dans chaques packages on aura des modules python
+    -dans chaque module on aura des fonctions

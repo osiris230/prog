@@ -66,6 +66,12 @@ class Etudiant:
             print(f"Code Permanent : {code_permanent}, \nNom : {nom}, \nPrénom : {prenom}, \nDate de Naissance : {date_naissance}, \nSpécialité : {specialite}")
             print("--------------------------------")
 
+    def update(self, code_permanent, nom, prenom, specialite):
+        sql="UPDATE etudiant SET nom=%s, prenom=%s, specialite=%s WHERE code_permanent=%s;"
+        params=(nom, prenom, specialite, code_permanent)
+        Etudiant.cursor.execute(sql,params)
+        Etudiant.connexion.commit()
+
     def delete(self, code_permanent):
         sql = "DELETE FROM etudiant WHERE code_permanent=%s"
         Etudiant.cursor.execute(sql, (code_permanent,))

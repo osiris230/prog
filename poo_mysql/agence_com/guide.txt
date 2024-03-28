@@ -1,0 +1,5 @@
+Créer une application de gestion du personnel de l'agence
+POO MODULAIRE:  
+- Créer un module(package) employes
+- Créer un module departements
+- Créer un module agence

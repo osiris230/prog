@@ -8,13 +8,20 @@ class DepartementDao:
         pass
 
     @classmethod
-    def create(cls, id, nom, emplacement):
-        sql = "INSERT INTO departement(id,nom,emplacement) VALUES (%s,%s,%s)"
-        params = (id, nom, emplacement)
-        DepartementDao.cursor.execute(sql,params)
-        DepartementDao.connexion.commit()
-        DepartementDao.cursor.close()
-        print(f"Ajout du département avec l'id : {id}.")
+    def create(cls, dpt:Departement):
+        sql = "INSERT INTO departement(nom,emplacement,direction) VALUES (%s,%s,%s)"
+        params = (dpt.nom, dpt.emplacement, dpt.direction)
+        try:
+            DepartementDao.cursor.execute(sql,params)
+            DepartementDao.connexion.commit()
+            DepartementDao.cursor.close()
+            message = f"Ajout du département : {dpt.nom}."
+        except Exception as exc:
+            message = exc
+            if 'Duplicate entry' in exc:
+                message = f"Le département '{dpt.nom}' existe déjà."
+
+        return message
     
     @classmethod
     def list_all(cls):
@@ -33,10 +40,10 @@ class DepartementDao:
         print(f"Suppression du département avec l'id : {id}.")
     
     @classmethod
-    def update(cls,id,nom,emplacement):
+    def update(cls,id, dpt:Departement):
         sql = "UPDATE departement SET nom=%s,emplacement=%s WHERE id=%s"
-        params = (id, nom, emplacement)
+        params = (id,dpt.nom, dpt.emplacement, dpt.direction)
         DepartementDao.cursor.execute(sql,params)
         DepartementDao.connexion.commit()
         DepartementDao.cursor.close()
-        print(f"Mise à jour du département avec l'id : {id}.")
+        print(f"Mise à jour du département : {dpt.nom}.")

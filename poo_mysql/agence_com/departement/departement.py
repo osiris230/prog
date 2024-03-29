@@ -1,16 +1,8 @@
 class Departement:
-    def __init__(self,id,nom,emplacement):
-        self.__id = id
+    def __init__(self,nom,emplacement,direction):
         self.__nom= nom
         self.__emplacement = emplacement
-
-    @property
-    def id(self):
-        return self.__id
-
-    @id.setter
-    def id(self, value):
-        self.__id = value
+        self.__direction = direction
 
     @property
     def nom(self):
@@ -27,4 +19,12 @@ class Departement:
     @emplacement.setter
     def emplacement(self, value):
         self.__emplacement = value
+
+    @property
+    def direction(self):
+        return self.__direction
+
+    @direction.setter
+    def direction(self, value):
+        self.__direction = value
 

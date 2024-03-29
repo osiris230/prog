@@ -8,21 +8,32 @@ class EmployeDao:
         pass
 
     @classmethod
-    def create(cls,nom,prenom,matricule,fonction,departement):
+    def create(cls,emp:Employe):
         sql = "INSERT INTO employe(nom,prenom,matricule,fonction,departement) VALUES (%s,%s,%s,%s,%s)"
-        params = (nom, prenom, matricule, fonction, departement)
-        EmployeDao.cursor.execute(sql,params)
-        EmployeDao.connexion.commit()
-        EmployeDao.cursor.close()
-        print(f"Ajout de l'employé avec le matricule {matricule}.")
+        params = (emp.nom, emp.prenom, emp.matricule, emp.fonction, emp.departement)
+        try:
+            EmployeDao.cursor.execute(sql,params)
+            EmployeDao.connexion.commit()
+            EmployeDao.cursor.close()
+            message = f"Ajout de l'employé avec le matricule {emp.matricule}."
+            
+        except Exception:
+            message = f"Une erreur est survenue lors de l'ajout, contactez Abdou si l'erreure persiste."
+        return message
     
     @classmethod
     def list_all(cls):
         sql = "SELECT * FROM employe"
-        EmployeDao.cursor.execute(sql)
-        employes = EmployeDao.cursor.fetchall()
-        EmployeDao.cursor.close()
-        return employes
+        try:
+            EmployeDao.cursor.execute(sql)
+            employes = EmployeDao.cursor.fetchall()
+            EmployeDao.cursor.close()
+            message = "Success"
+        except Exception:
+            employes = []
+            message = "Erreur lors de la récupération des donnés."
+        return (employes, message)
+    
     
     @classmethod
     def list_one(cls,matricule):
@@ -41,10 +52,10 @@ class EmployeDao:
         print(f"Suppression de l'employé avec le matricule {matricule}.")
     
     @classmethod
-    def update(cls,nom,prenom,matricule,fonction,departement, id):
+    def update(cls,emp:Employe):
         sql = "UPDATE employe SET nom=%s,prenom=%s,matricule=%s,fonction=%s,departement=%s WHERE id=%s"
-        params = (nom, prenom, matricule, fonction, departement, id)
+        params = (emp.nom, emp.prenom, emp.matricule, emp.fonction, emp.departement)
         EmployeDao.cursor.execute(sql,params)
         EmployeDao.connexion.commit()
         EmployeDao.cursor.close()
-        print(f"Mise à jour de l'employé avec le matricule {matricule}.")
+        print(f"Mise à jour de l'employé avec le matricule {emp.matricule}.")

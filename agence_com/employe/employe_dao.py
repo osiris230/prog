@@ -1,5 +1,5 @@
 import database as db
-from employe.Employe import Employe
+from Employe import Employe
 
 class EmployeDao:
     connexion = db.connexion_db()
@@ -18,8 +18,25 @@ class EmployeDao:
         return employes, message
     
     @classmethod
-    def add(emp:Employe):
+    def add(cls,emp:Employe):
         sql = "INSERT INTO employe (nom, prenom, matricule, fonction, departement) VALUES (%s,%s,%s,%s,%s)"
         params = (emp.nom,emp.prenom,emp.matricule,emp.fonction,emp.departement)
-        EmployeDao.cursor.execute(sql,params)
-        EmployeDao.connexion.commit()
+        try:
+            EmployeDao.cursor.execute(sql,params)
+            EmployeDao.connexion.commit()
+            message = "Success"
+        except Exception as ex:
+            message = "Error"
+        return message
+    
+    @classmethod
+    def get_one(cls,matricule):
+        sql = "SELET * FROM employe WHERE matricule=%s"
+        try:
+            EmployeDao.cursor.execute(sql, (matricule,))
+            message = "Success"
+            employe = EmployeDao.cursor.fetchone()
+        except Exception as ex:
+            message = "Erreur lors de la recherche"
+            employe = []
+        return (message,employe)

@@ -24,3 +24,7 @@ def login():
 def employes():
     employes = employe.liste()
     return render_template("employe.html", employes=employes)
+
+@app.route("/add-employe")
+def add_employe():
+    return render_template("add_employe.html")

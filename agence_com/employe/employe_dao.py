@@ -31,7 +31,7 @@ class EmployeDao:
     
     @classmethod
     def get_one(cls,matricule):
-        sql = "SELET * FROM employe WHERE matricule=%s"
+        sql = "SELECT * FROM employe WHERE matricule=%s"
         try:
             EmployeDao.cursor.execute(sql, (matricule,))
             message = "Success"

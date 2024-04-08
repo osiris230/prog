@@ -1,4 +1,5 @@
 import database as db
+from employe.Employe import Employe
 
 class EmployeDao:
     connexion = db.connexion_db()
@@ -15,3 +16,10 @@ class EmployeDao:
             employes = []
             message = "Error"
         return employes, message
+    
+    @classmethod
+    def add(emp:Employe):
+        sql = "INSERT INTO employe (nom, prenom, matricule, fonction, departement) VALUES (%s,%s,%s,%s,%s)"
+        params = (emp.nom,emp.prenom,emp.matricule,emp.fonction,emp.departement)
+        EmployeDao.cursor.execute(sql,params)
+        EmployeDao.connexion.commit()

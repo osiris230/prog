@@ -1,6 +1,9 @@
-from flask import Flask, render_template, url_for
-import employe
-import departement
+from flask import Flask, render_template, url_for, request
+
+from employes.Employe import Employe
+from employes.employe_dao import EmployeDao
+from departements.departement import Departement
+from departements.departement_dao import DepartementDao
 
 
 app = Flask(__name__)
@@ -23,18 +26,30 @@ def login():
 
 @app.route("/employe")
 def employes():
-    employes = employe.liste()
+    employes = EmployeDao.get_all()
     return render_template("employe.html", employes=employes)
 
-@app.route("/add-employe")
+@app.route("/add-employe",methods=["POST","GET"])
 def add_employe():
-    return render_template("add_employe.html")
+    req = request.form
+    nom = req.get('nom')
+    prenom = req.get('prenom')
+    matricule = req.get('matricule')
+    fonction = req.get('fonction')
+    departement = req.get('departement')
+    employe = Employe(nom,prenom,matricule,fonction,departement)
+    message = EmployeDao.add(employe)
+    return render_template("add_employe.html",employe=employe,message=message)
 
 @app.route("/departements")
 def departements():
-    departements = departement.dliste()
+    departements = DepartementDao.list_all()
     return render_template("departements.html", departements=departements)
 
 @app.route("/add-departements")
 def add_departements():
     return render_template("add_departements.html")
+
+@app.route("/traitement", methods=['POST','GET'])
+def traitement():
+    return "add employe"

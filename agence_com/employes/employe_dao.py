@@ -1,5 +1,5 @@
 import database as db
-from employe.Employe import Employe
+from employes.Employe import Employe
 
 class EmployeDao:
     connexion = db.connexion_db()
@@ -9,13 +9,8 @@ class EmployeDao:
     def get_all(cls):
         sql = "SELECT * FROM employe"
         EmployeDao.cursor.execute(sql)
-        try:
-            employes = EmployeDao.cursor.fetchall()
-            message = "Success"
-        except Exception as err:
-            employes = []
-            message = "Error"
-        return employes, message
+        employers = EmployeDao.cursor.fetchall()
+        return employers
     
     @classmethod
     def add(cls,emp:Employe):

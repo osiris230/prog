@@ -14,7 +14,7 @@ class DepartementDao:
         try:
             DepartementDao.cursor.execute(sql,params)
             DepartementDao.connexion.commit()
-            DepartementDao.cursor.close()
+            
             message = f"Ajout du département : {dpt.nom}."
         except Exception as exc:
             message = exc
@@ -28,7 +28,7 @@ class DepartementDao:
         sql = "SELECT * FROM departement"
         DepartementDao.cursor.execute(sql)
         Departements = DepartementDao.cursor.fetchall()
-        DepartementDao.cursor.close()
+        
         return Departements
     
     @classmethod
@@ -36,7 +36,7 @@ class DepartementDao:
         sql = "DELETE FROM departement WHERE id=%s"
         DepartementDao.cursor.execute(sql,(id,))
         DepartementDao.connexion.commit()
-        DepartementDao.cursor.close()
+        
         print(f"Suppression du département avec l'id : {id}.")
     
     @classmethod
@@ -45,5 +45,5 @@ class DepartementDao:
         params = (id,dpt.nom, dpt.emplacement, dpt.direction)
         DepartementDao.cursor.execute(sql,params)
         DepartementDao.connexion.commit()
-        DepartementDao.cursor.close()
+        
         print(f"Mise à jour du département : {dpt.nom}.")

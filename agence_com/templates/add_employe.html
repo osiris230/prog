@@ -5,27 +5,33 @@
 
 {% block content %}
 <h1>Veuillex remplir ce champ pour ajouter un employé</h1>
+<div>
+    {% if message=='error'%}
+    <p class="alert alert-danger" role="alert">Tout les champs sont obligatoires !</p>
+    {%endif%}
+</div>
 <form action="{{url_for('add_employe')}}" method="POST">
     <div class="form-floating mb-3">
-        <input name="nom" type="text" class="form-control" id="nom" placeholder="">
+        <input  name="nom" type="text" class="form-control" id="nom" >
         <label for="nom">Nom</label>
     </div>
     <div class="form-floating mb-3">
-        <input name="prenom" type="text" class="form-control" id="prenom" placeholder="">
+        <input  name="prenom" type="text" class="form-control" id="prenom" >
         <label for="prenom">Prenom</label>
     </div>
     <div class="form-floating mb-3">
-        <input name="matricule" type="text" class="form-control" id="matricule" placeholder="">
+        <input  name="matricule" type="text" class="form-control" id="matricule" >
         <label for="matricule">Matricule</label>
     </div>
     <div class="form-floating mb-3">
-        <input name="fonction" type="text" class="form-control" id="fonction" placeholder="">
+        <input  name="fonction" type="text" class="form-control" id="fonction" >
         <label for="fonction">Fonction</label>
     </div>
     <div class="form-floating mb-3">
-        <input name="departement" type="text" class="form-control" id="departement" placeholder="">
+        <input  name="departement" type="text" class="form-control" id="departement" >
         <label for="departement">Département</label>
     </div>
     <button type="submit" class="btn btn-primary">Ajouter l'employé</button>
+    <img src="https://media.istockphoto.com/id/1365436662/photo/successful-partnership.jpg?s=612x612&w=0&k=20&c=B1xspe9Q5WMsLc7Hc9clR8MWUL4bsK1MfUdDNVNR2Xg=" alt="corporate">
 </form>
 {% endblock %}

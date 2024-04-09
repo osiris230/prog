@@ -32,14 +32,21 @@ def employes():
 @app.route("/add-employe",methods=["POST","GET"])
 def add_employe():
     req = request.form
-    nom = req.get('nom')
-    prenom = req.get('prenom')
-    matricule = req.get('matricule')
-    fonction = req.get('fonction')
-    departement = req.get('departement')
-    employe = Employe(nom,prenom,matricule,fonction,departement)
-    message = EmployeDao.add(employe)
-    return render_template("add_employe.html",employe=employe,message=message)
+    message = None
+    if request.method == "POST":
+        nom = req['nom']
+        prenom = req['prenom']
+        matricule = req['matricule']
+        fonction = req['fonction']
+        departement = req['departement']
+        
+        if nom=="" or prenom=="" or matricule=="" or fonction=="" or departement=="":
+            message="error"
+        else:
+            employe = Employe(nom,prenom,matricule,fonction,departement)
+            message = EmployeDao.add(employe)
+        print(message)
+    return render_template("add_employe.html",message=message)
 
 @app.route("/departements")
 def departements():

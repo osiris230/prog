@@ -1,0 +1,24 @@
+{% extends 'default.html' %}
+{% block title %} Ajout d'un département {% endblock %}
+
+
+
+{% block content %}
+<h1>Veuillex remplir ce champ pour ajouter un département</h1>
+<form>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="nom" placeholder="">
+        <label for="nom">Nom</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="prenom" placeholder="">
+        <label for="prenom">Emplacement</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="matricule" placeholder="">
+        <label for="matricule">Direction</label>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Ajouter le département</button>
+</form>
+{% endblock %}

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for
 import employe
+import departement
 
 
 app = Flask(__name__)
@@ -28,3 +29,12 @@ def employes():
 @app.route("/add-employe")
 def add_employe():
     return render_template("add_employe.html")
+
+@app.route("/departements")
+def departements():
+    departements = departement.dliste()
+    return render_template("departements.html", departements=departements)
+
+@app.route("/add-departements")
+def add_departements():
+    return render_template("add_departements.html")

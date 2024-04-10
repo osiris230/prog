@@ -14,13 +14,9 @@ class DepartementDao:
         try:
             DepartementDao.cursor.execute(sql,params)
             DepartementDao.connexion.commit()
-            
-            message = f"Ajout du département : {dpt.nom}."
+            message = "Success"
         except Exception as exc:
-            message = exc
-            if 'Duplicate entry' in exc:
-                message = f"Le département '{dpt.nom}' existe déjà."
-
+            message = "Error"
         return message
     
     @classmethod

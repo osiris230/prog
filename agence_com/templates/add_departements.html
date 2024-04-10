@@ -5,18 +5,27 @@
 
 {% block content %}
 <h1>Veuillex remplir ce champ pour ajouter un département</h1>
-<form>
+<div class="container">
+    {% if message=='error'%}
+    <p class="alert alert-danger" role="alert">Tout les champs sont obligatoires !</p>
+    {% elif message == 'Error'%}
+    <p class="alert alert-warning" role="warning">Erreur lors de l'ajout.</p>
+    {% elif message=='Success'%}
+    <p class="alert alert-success" role="success">Ajout du départment {{departement.nom}} avec succès!</p>
+    {%endif%}
+</div>
+<form action="{{url_for('add_departements')}}" method="POST">
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="nom" placeholder="">
+        <input type="text" class="form-control" id="nom">
         <label for="nom">Nom</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="prenom" placeholder="">
-        <label for="prenom">Emplacement</label>
+        <input type="text" class="form-control" id="emplacement">
+        <label for="emplacement">Emplacement</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="matricule" placeholder="">
-        <label for="matricule">Direction</label>
+        <input type="text" class="form-control" id="direction">
+        <label for="direction">Direction</label>
     </div>
     
     <button type="submit" class="btn btn-primary">Ajouter le département</button>

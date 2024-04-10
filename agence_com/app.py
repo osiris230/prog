@@ -54,9 +54,21 @@ def departements():
     departements = DepartementDao.list_all()
     return render_template("departements.html", departements=departements)
 
-@app.route("/add-departements")
+@app.route("/add-departements",methods=["POST","GET"])
 def add_departements():
-    return render_template("add_departements.html")
+    req = request.form
+    message = None
+    departement = None
+    if request.method == "POST":
+        nom = req.get('nom')
+        emplacement = req.get('emplacement')
+        direction = req.get('direction')
+        if nom=="" or emplacement=="" or direction=="":
+            message="error"
+        else:
+            departement = Departement(nom,emplacement,direction)
+            message = DepartementDao.create(departement)
+    return render_template("add_departements.html",message=message,department=departement)
 
 @app.route("/traitement", methods=['POST','GET'])
 def traitement():

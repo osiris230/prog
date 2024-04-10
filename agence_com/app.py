@@ -60,9 +60,9 @@ def add_departements():
     message = None
     departement = None
     if request.method == "POST":
-        nom = req.get('nom')
-        emplacement = req.get('emplacement')
-        direction = req.get('direction')
+        nom = req['nom']
+        emplacement = req['emplacement']
+        direction = req['direction']
         if nom=="" or emplacement=="" or direction=="":
             message="error"
         else:

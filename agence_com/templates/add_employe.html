@@ -11,7 +11,7 @@
     {% elif message == 'Error'%}
     <p class="alert alert-warning" role="warning">Erreur lors de l'ajout, le matricule ne peut être un diplicata. Si l'erreur persiste, veuillez contacter Abdou.</p>
     {% elif message=='Success'%}
-    <p class="alert alert-success" role="success">Ajout de l'employé {{employe.matricule}} avec succes!</p>
+    <p class="alert alert-success" role="success">Ajout de l'employé {{employe.matricule}} avec succès!</p>
     {%endif%}
 </div>
 <form action="{{url_for('add_employe')}}" method="POST">

@@ -9,7 +9,7 @@ class DepartementDao:
 
     @classmethod
     def create(cls, dpt:Departement):
-        sql = "INSERT INTO departement(nom,emplacement,direction) VALUES (%s,%s,%s)"
+        sql = "INSERT INTO departement (nom,emplacement,direction) VALUES (%s,%s,%s)"
         params = (dpt.nom, dpt.emplacement, dpt.direction)
         try:
             DepartementDao.cursor.execute(sql,params)

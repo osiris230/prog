@@ -68,7 +68,7 @@ def add_departements():
         else:
             departement = Departement(nom,emplacement,direction)
             message = DepartementDao.create(departement)
-    return render_template("add_departements.html",message=message,department=departement)
+    return render_template("add_departements.html",message=message,departement=departement)
 
 @app.route("/traitement", methods=['POST','GET'])
 def traitement():

@@ -30,31 +30,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('services')}}">Services</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{{url_for('employes')}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Employés
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{{url_for('employes')}}">Liste des employés</a></li>
-                          <li><a class="dropdown-item" href="{{url_for('add_employe')}}">Ajouter un employé</a></li>
-                        </ul>
-                      </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{{url_for('departements')}}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Départements
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="{{url_for('departements')}}">Départements</a></li>
-                          <li><a class="dropdown-item" href="{{url_for('add_departements')}}">Ajouter un département</a></li>
-                        </ul>
-                      </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('employes')}}">Employés</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('add_employe')}}">Ajout d'employés</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('departements')}}">Départements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('add_departements')}}">Ajout d'un département</a>
+                    </li>
                     
                 </ul>
             </div>
         </div>
-        
     </nav>
-<hr>
 
     <div>{% block content %} {% endblock %}
 

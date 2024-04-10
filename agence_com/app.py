@@ -33,6 +33,7 @@ def employes():
 def add_employe():
     req = request.form
     message = None
+    employe = None
     if request.method == "POST":
         nom = req['nom']
         prenom = req['prenom']
@@ -46,7 +47,7 @@ def add_employe():
             employe = Employe(nom,prenom,matricule,fonction,departement)
             message = EmployeDao.add(employe)
         #print(message)
-    return render_template("add_employe.html",message=message)
+    return render_template("add_employe.html",employe=employe,message=message)
 
 @app.route("/departements")
 def departements():

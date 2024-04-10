@@ -45,7 +45,7 @@ def add_employe():
         else:
             employe = Employe(nom,prenom,matricule,fonction,departement)
             message = EmployeDao.add(employe)
-        print(message)
+        #print(message)
     return render_template("add_employe.html",message=message)
 
 @app.route("/departements")

@@ -42,6 +42,11 @@ def login():
         print(message)
     return render_template("login.html",message=message,utilisateur=utilisateur)
 
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
 @app.route("/employe")
 def employes():
     employes = EmployeDao.get_all()

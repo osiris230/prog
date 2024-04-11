@@ -9,9 +9,9 @@
   {% if message=='error'%}
   <p class="alert alert-danger">Tout les champs sont obligatoires !</p>
   {% elif  utilisateur==None and message=='Success' %}
-  <p class="alert alert-warning">Nom d'utilisateur ou mot de passe incorrect</p>
+  <p class="alert alert-warning">Nom d'utilisateur ou mot de passe incorrect.</p>
   {% elif message=='Error' %}
-  <p class="alert alert-danger"> Serveur inacessible, contacter Abdou.</p>
+  <p class="alert alert-danger"> Serveur inaccessible, contacter Abdou.</p>
   {%endif%}
 </div>
 <form action="{{url_for('login')}}" method="POST">

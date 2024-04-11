@@ -4,7 +4,7 @@ from employes.Employe import Employe
 from employes.employe_dao import EmployeDao
 from departements.departement import Departement
 from departements.departement_dao import DepartementDao
-from utilisateurs.utilisateurs import Utilisateur
+from utilisateurs.utilisateur import Utilisateur
 from utilisateurs.utilisateur_dao import UtilisateurDao
 
 
@@ -40,7 +40,7 @@ def login():
               session['nom'] = utilisateur[1]
               return redirect(url_for('home'))
         print(message)
-    return render_template("login.html",message=message)
+    return render_template("login.html",message=message,utilisateur=utilisateur)
 
 @app.route("/employe")
 def employes():

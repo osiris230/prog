@@ -1,5 +1,6 @@
 import database as db
-from utilisateurs.utilisateurs import Utilisateur
+from utilisateurs.utilisateur import Utilisateur
+#from utilisateur import Utilisateur
 
 class UtilisateurDao:
     connexion = db.connexion_db()

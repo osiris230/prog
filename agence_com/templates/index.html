@@ -7,5 +7,9 @@
 <h1>Home page</h1>
 <p>Welcome to the homepage of my website.</p>
 <img src="https://previews.123rf.com/images/alphaspirit/alphaspirit1704/alphaspirit170400140/76548352-business-team-corporate.jpg" alt="">
+
+    {% if username in session %}
+        <p>Bienvenue</p>
+    {% endif %}
 {% endblock %}
 

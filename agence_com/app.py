@@ -1,12 +1,15 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, session, redirect
 
 from employes.Employe import Employe
 from employes.employe_dao import EmployeDao
 from departements.departement import Departement
 from departements.departement_dao import DepartementDao
+from utilisateurs.utilisateurs import Utilisateur
+from utilisateurs.utilisateur_dao import UtilisateurDao
 
 
 app = Flask(__name__)
+app.secret_key='secretkey'
 
 @app.route("/")
 def home():
@@ -20,9 +23,24 @@ def about():
 def services():
     return render_template("services.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    req= request.form
+    message = None
+    utilisateur = None
+    if request.method == "POST":
+        username = req['username']
+        mdp = req['mdp']
+        if username == '' or mdp == '':
+            message = 'error'
+        else:
+          (message,utilisateur) =  UtilisateurDao.get_one(username,mdp)
+          if message=='Success' and utilisateur != None:
+              session['username'] = utilisateur[2]
+              session['nom'] = utilisateur[1]
+              return redirect(url_for('home'))
+        print(message)
+    return render_template("login.html",message=message)
 
 @app.route("/employe")
 def employes():
@@ -69,7 +87,3 @@ def add_departements():
             departement = Departement(nom,emplacement,direction)
             message = DepartementDao.create(departement)
     return render_template("add_departements.html",message=message,departement=departement)
-
-@app.route("/traitement", methods=['POST','GET'])
-def traitement():
-    return "add employe"

@@ -1,0 +1,38 @@
+{% extends 'default.html' %}
+{% block title %} Ajout d'un utilisateur {% endblock %}
+
+
+
+{% block content %}
+<h1>Veuillez remplir ce champ pour ajouter un utilisateur</h1>
+<div class="container">
+    {% if message=='error'%}
+    <p class="alert alert-danger" role="alert">Tout les champs sont obligatoires !</p>
+    {% elif message == 'Error'%}
+    <p class="alert alert-warning" role="warning">Erreur lors de l'ajout, si l'erreur persiste, veuillez contacter Abdou.</p>
+    {% elif message=='Success'%}
+    <p class="alert alert-success" role="success">Ajout de l'utilisateur {{utilisateur.nom}} avec succès!</p>
+    {%endif%}
+</div>
+<form action="{{url_for('register')}}" method="POST">
+    <div class="form-floating mb-3">
+        <input  name="nom" type="text" class="form-control" id="nom" >
+        <label for="nom">Nom</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input  name="username" type="text" class="form-control" id="username" >
+        <label for="username">Username</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input  name="mdp" type="text" class="form-control" id="mdp" >
+        <label for="mdp">Password</label>
+    </div>
+    
+    </div>
+    <div class ="form-floating mb-3">
+        <button type="submit" class="btn btn-primary">Ajouter l'utilisateur</button>
+    </div>
+    
+    <img src="https://media.istockphoto.com/id/1365436662/photo/successful-partnership.jpg?s=612x612&w=0&k=20&c=B1xspe9Q5WMsLc7Hc9clR8MWUL4bsK1MfUdDNVNR2Xg=" alt="corporate">
+</form>
+{% endblock %}

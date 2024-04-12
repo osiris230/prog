@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, request, session, redirect
+from flask_bcrypt import Bcrypt
 
 from employes.Employe import Employe
 from employes.employe_dao import EmployeDao
@@ -10,6 +11,7 @@ from utilisateurs.utilisateur_dao import UtilisateurDao
 
 app = Flask(__name__)
 app.secret_key='secretkey'
+bcrypt = Bcrypt(app) 
 
 @app.route("/")
 def home():
@@ -23,6 +25,26 @@ def about():
 def services():
     return render_template("services.html")
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    message=None
+    utilisateur=None
+    req = request.form
+    if request.method == "POST":
+        nom = req['nom']
+        username = req['username']
+        mdp = req['mdp']
+        hashed_password = bcrypt.generate_password_hash(mdp).decode('utf-8')
+        if nom=="" or username=="" or mdp=="":
+            message="error"
+        else:
+                
+            utilisateur = Utilisateur(nom,username,hashed_password)
+            message = UtilisateurDao.create(utilisateur)
+        #print(message)
+    return render_template(f'register.html', message=message,utilisateur=utilisateur)
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     req= request.form
@@ -34,12 +56,18 @@ def login():
         if username == '' or mdp == '':
             message = 'error'
         else:
-          (message,utilisateur) =  UtilisateurDao.get_one(username,mdp)
-          if message=='Success' and utilisateur != None:
-              session['username'] = utilisateur[2]
-              session['nom'] = utilisateur[1]
-              return redirect(url_for('home'))
+            (message,utilisateur) =  UtilisateurDao.get_one(username,mdp)
+            if message=='Success' and utilisateur != None:
+                if bcrypt.check_password_hash(utilisateur[3], mdp):
+                    session['username'] = utilisateur[2]
+                    session['nom'] = utilisateur[1]
+                    return redirect(url_for('home'))
+                else:
+                    message = 'Nom d\'utilisateur ou mot de passe incorrect.'
+            else:
+                message = 'Nom d\'utilisateur ou mot de passe incorrect.'
         print(message)
+            
     return render_template("login.html",message=message,utilisateur=utilisateur)
 
 @app.route("/logout")

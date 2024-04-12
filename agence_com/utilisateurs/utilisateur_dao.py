@@ -1,4 +1,5 @@
 import database as db
+import flask_bcrypt as bcrypt
 from utilisateurs.utilisateur import Utilisateur
 #from utilisateur import Utilisateur
 
@@ -31,11 +32,13 @@ class UtilisateurDao:
     
     @classmethod
     def get_one(cls,username,mdp):
-        sql = "SELECT * FROM utilisateurs WHERE username=%s AND mdp=%s"
+        sql = "SELECT * FROM utilisateurs WHERE username=%s"
         try:
-            UtilisateurDao.cursor.execute(sql, (username,mdp))
+            UtilisateurDao.cursor.execute(sql, (username,))
             utilisateur = UtilisateurDao.cursor.fetchone()
-            message = "Success"
+            if utilisateur:
+                if bcrypt.check_password_hash(utilisateur[3], mdp):
+                    message = "Success"
         except Exception as ex:
             message = "Error"
             utilisateur = []

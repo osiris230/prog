@@ -49,11 +49,15 @@ def logout():
 
 @app.route("/employe")
 def employes():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     employes = EmployeDao.get_all()
     return render_template("employe.html", employes=employes)
 
 @app.route("/add-employe",methods=["POST","GET"])
 def add_employe():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     req = request.form
     message = None
     employe = None

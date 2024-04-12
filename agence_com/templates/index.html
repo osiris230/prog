@@ -1,15 +1,16 @@
 {% extends 'default.html' %}
-{% block title %} Home {% endblock %}
+{% block title %} Acceuil {% endblock %}
    
 
      
 {% block content %}
 <h1>Home page</h1>
 <p>Welcome to the homepage of my website.</p>
+{% if 'username' in session %}
+        <p>Bienvenue {{session.nom}}</p>
+    {% endif %}
 <img src="https://previews.123rf.com/images/alphaspirit/alphaspirit1704/alphaspirit170400140/76548352-business-team-corporate.jpg" alt="">
 
-    {% if username in session %}
-        <p>Bienvenue</p>
-    {% endif %}
+    
 {% endblock %}
 

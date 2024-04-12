@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 11 avr. 2024 à 00:21
+-- Généré le : ven. 12 avr. 2024 à 21:37
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -70,6 +70,26 @@ INSERT INTO `employe` (`nom`, `prenom`, `matricule`, `fonction`, `departement`, 
 ('Spartan', 'John', 'JS117', 'Master Chief', 'Halo', 42),
 ('Sparrow', 'Jack', 'JS12345', 'Pirate', 'black pearl', 47);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateurs`
+--
+
+CREATE TABLE `utilisateurs` (
+  `id` int(60) NOT NULL,
+  `nom` varchar(30) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `mdp` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`id`, `nom`, `username`, `mdp`) VALUES
+(7, 'Jack', 'J123', '$2b$12$jHEezSl1UkAWWSAJuoiLauqRycc6ej6oEOFKpr6UQyPtf6Pe3Xt06');
+
 --
 -- Index pour les tables déchargées
 --
@@ -88,6 +108,14 @@ ALTER TABLE `employe`
   ADD UNIQUE KEY `matricule` (`matricule`);
 
 --
+-- Index pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  ADD PRIMARY KEY (`mdp`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -102,6 +130,12 @@ ALTER TABLE `departement`
 --
 ALTER TABLE `employe`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  MODIFY `id` int(60) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
